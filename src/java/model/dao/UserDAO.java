@@ -24,6 +24,7 @@ public class UserDAO {
     try {
         Connection con = DatabaseConnector.getConnection();
         String sql = "SELECT * FROM Users WHERE Username = ? AND CONVERT(VARCHAR(MAX), Password) = ?";
+       
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, username);
@@ -31,7 +32,7 @@ public class UserDAO {
 
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    User user = new User(rs.getString("Username"), rs.getString("Password"));
+                    User user = new User(rs.getString("Username"), rs.getString("Password"), rs.getString("Email"), rs.getString("Address"), rs.getString("Phone"),rs.getString("Role"));
                     return user;
                 }
             }
@@ -41,6 +42,11 @@ public class UserDAO {
     }
     return null;
 }
+  
+
+     
+     
+     
     public void addUser(User user) {
         String sql = "INSERT INTO Users (Username, Password, Email, Address, Phone, Role) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

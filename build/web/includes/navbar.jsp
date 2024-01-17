@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
         <title>Search</title>
@@ -125,6 +126,7 @@
             </div>
             <div class="offcanvas-body">
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
+                <c:if test="${sessionScope.auth.role != 'Admin'}">
                 <li class="nav-item">
                   <a class="nav-link me-4 active" href="index.jsp">Home</a>
                 </li>
@@ -140,18 +142,28 @@
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.auth.role == 'Admin'}">
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="ManageProduct.jsp">Manger Product</a>
+                </li>
+                </c:if>
+                <c:if test="${sessionScope.auth != null}">
                 <li class="nav-item">
                   <a class="nav-link me-4" href="LogoutServlet">Log out</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link me-4" href="#">HELLO ${sessionScope.auth.username}</a>
+                </li>
+                </c:if>
+                <c:if test="${sessionScope.auth.role != 'Admin'}">
                 <li class="nav-item dropdown">
                   <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="about.html" class="dropdown-item">About</a>
                     </li>
-                    <li>
-                      <a href="AdminLogin.jsp" class="dropdown-item">Admin Login</a>
-                    </li>
+                  
                     <li>
                       <a href="shop.html" class="dropdown-item">Shop</a>
                     </li>
@@ -172,6 +184,7 @@
                     </li>
                   </ul>
                 </li>
+                </c:if>
                 <li class="nav-item">
                   <div class="user-items ps-5">
                     <ul class="d-flex justify-content-end list-unstyled">
@@ -182,6 +195,7 @@
                           </svg>
                         </a>
                       </li>
+                      <c:if test="${sessionScope.auth == null}">
                       <li class="pe-3">
                         <a href="login.jsp">
                           <svg class="user">
@@ -189,6 +203,7 @@
                           </svg>
                         </a>
                       </li>
+                        </c:if>
                       <li>
                         <a href="cart.html">
                           <svg class="cart">
