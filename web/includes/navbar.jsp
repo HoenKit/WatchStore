@@ -144,9 +144,13 @@
                 </li>
                 </c:if>
                 <c:if test="${sessionScope.auth.role == 'Admin'}">
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="ManageProduct.jsp">Manger Product</a>
-                </li>
+                    <li class="nav-item">
+                  <a class="nav-link me-4 active" href="index.jsp">Home</a>
+                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Product</a>
+                        </li>
+
                 </c:if>
                 <c:if test="${sessionScope.auth != null}">
                 <li class="nav-item">
@@ -204,6 +208,7 @@
                         </a>
                       </li>
                         </c:if>
+                           <c:if test="${sessionScope.auth.role != 'Admin'}">
                       <li>
                         <a href="cart.html">
                           <svg class="cart">
@@ -211,6 +216,7 @@
                           </svg>
                         </a>
                       </li>
+                      </c:if>
                     </ul>
                   </div>
                 </li>

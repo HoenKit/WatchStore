@@ -78,7 +78,7 @@ public class UserServlet extends HttpServlet {
 
 			UserDAO udao = new UserDAO(connection);
                         
-                        User user = new User("check1","check2");
+                        User user = new User(username,password);
 			  try {
 
                          user = udao.checkLogIn(username, password);
