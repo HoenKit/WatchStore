@@ -52,13 +52,13 @@
                 <label for="imageURL">Image URL:</label>
                 <input type="text" id="imageURL" name="imageURL" class="form-control" required>
             </div>
-
             <br>
-            <br>
-            <br>
-    
-            <button type="submit" class="btn btn-dark">Add Product</button>
+            <button type="submit" class="btn btn-dark">Add Product</button>            
         </div>
+        <br>
+    <br>
+    <br>
+    <br>
     </form>
     <%@ include file="includes/footer.jsp" %>
 </body>

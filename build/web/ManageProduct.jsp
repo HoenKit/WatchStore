@@ -53,12 +53,13 @@
             </table>
 
             <div class="addbtn">
-                <button class="btn btn-dark" name="command" value ="addForm" >Add</button>
+                <button class="btn btn-dark" name="command" value ="addForm" >Add</button> 
             </div>
-            <br>           
             <br>
-            <button value="list" name="command" class="btn btn-dark">Show List</button>   
-        </div>
+    <br>
+    <br>
+    <br>
+    <br>
     </form>
     <%@include file="includes/footer.jsp" %>
 </body>
