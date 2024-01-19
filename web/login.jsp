@@ -21,12 +21,12 @@
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+    <%@include file="includes/header.jsp" %>
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+    <%@include file="includes/navbar.jsp" %>
     <div class="main">
 
         <!-- Sign up form -->
@@ -46,15 +46,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password"/>
+                                <input type="password" name="password" id="password" placeholder="Your Password"/>
                             </div>
                             <div class="form-group">
                                 <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-                                <input type="text" name="phone" id="phone" placeholder="phone"/>
+                                <input type="text" name="phone" id="phone" placeholder="Your Phone"/>
                             </div>
                             <div class="form-group">
                                 <label for="address"><i class="zmdi zmdi-address"></i></label>
-                                <input type="text" name="address" id="address" placeholder="Address"/>
+                                <input type="text" name="address" id="address" placeholder="Your Address"/>
                             </div>
                             <div class="form-group">
                                 <input type="hidden" name="role" id="role" value="User"/>

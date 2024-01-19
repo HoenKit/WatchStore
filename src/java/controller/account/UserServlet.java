@@ -71,9 +71,7 @@ public class UserServlet extends HttpServlet {
                     Connection connection = DatabaseConnector.getConnection();
 			String username = request.getParameter("Username");
 			String password = request.getParameter("Password");
-                        System.out.println("======================================================");                
-                        System.out.println(username);                
-                        System.out.println(password);
+                        
 
 
 			UserDAO udao = new UserDAO(connection);
@@ -93,7 +91,7 @@ public class UserServlet extends HttpServlet {
 				session.setAttribute("auth", user);
                                 
 //				System.out.print("user logged in");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("WelcomeServlet?");
 			} else {
                                 request.setAttribute("mess","Wrong Name or Password, please try again!");
 				request.getRequestDispatcher("login.jsp").forward(request, response);

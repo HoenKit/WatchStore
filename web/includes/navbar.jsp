@@ -137,9 +137,6 @@
                   <a class="nav-link me-4" href="#mobile-products">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
                 </li>
                 </c:if>
