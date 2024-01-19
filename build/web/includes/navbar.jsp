@@ -128,7 +128,7 @@
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                 <c:if test="${sessionScope.auth.role != 'Admin'}">
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="index.jsp">Home</a>
+                  <a class="nav-link me-4 active" href="WelcomeServlet?">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#company-services">Services</a>
@@ -137,22 +137,26 @@
                   <a class="nav-link me-4" href="#mobile-products">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
                 </li>
+                
                 </c:if>
                 <c:if test="${sessionScope.auth.role == 'Admin'}">
                     <li class="nav-item">
-                  <a class="nav-link me-4 active" href="index.jsp">Home</a>
+                  <a class="nav-link me-4 active" href="WelcomeServlet?">Home</a>
                     </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Product</a>
+                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Users</a>
                         </li>
 
                 </c:if>
                 <c:if test="${sessionScope.auth != null}">
+                    <li class="nav-item">
+                  <a class="nav-link me-4" href="profile.jsp">Profile</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="LogoutServlet">Log out</a>
                 </li>
@@ -169,7 +173,7 @@
                     </li>
                   
                     <li>
-                      <a href="shop.html" class="dropdown-item">Shop</a>
+                      <a href="ProductServlet?" class="dropdown-item">Shop</a>
                     </li>
                     <li>
                       <a href="cart.html" class="dropdown-item">Cart</a>
@@ -177,12 +181,8 @@
                     <li>
                       <a href="checkout.html" class="dropdown-item">Checkout</a>
                     </li>
-                    <li>
-                      <a href="single-post.html" class="dropdown-item">Single Post</a>
-                    </li>
-                    <li>
-                      <a href="single-product.html" class="dropdown-item">Single Product</a>
-                    </li>
+                    
+                    
                     <li>
                       <a href="contact.html" class="dropdown-item">Contact</a>
                     </li>

@@ -69,17 +69,17 @@ public class UserServlet extends HttpServlet {
        response.setContentType("text/html;charset=UTF-8");
 		try (PrintWriter out = response.getWriter()) {
                     Connection connection = DatabaseConnector.getConnection();
-			String username = request.getParameter("Username");
+			String email = request.getParameter("Email");
 			String password = request.getParameter("Password");
                         
 
 
 			UserDAO udao = new UserDAO(connection);
                         
-                        User user = new User(username,password);
+                        User user = new User(email,password);
 			  try {
 
-                         user = udao.checkLogIn(username, password);
+                         user = udao.checkLogIn(email, password);
 
                     } catch (Exception e) {
                         System.out.println("===============");              

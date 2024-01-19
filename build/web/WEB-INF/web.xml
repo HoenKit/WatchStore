@@ -12,6 +12,17 @@
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>controller.products.ProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>controller.account.SignUpServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description>
+</description>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>controller.products.WelcomeServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
@@ -23,6 +34,14 @@
     <servlet-mapping>
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/ProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/SignUpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern>/WelcomeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

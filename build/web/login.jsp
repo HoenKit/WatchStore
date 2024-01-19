@@ -21,12 +21,12 @@
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+    <%@include file="includes/header.jsp" %>
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+    <%@include file="includes/navbar.jsp" %>
     <div class="main">
 
         <!-- Sign up form -->
@@ -35,29 +35,36 @@
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form action = "SignUpServlet"method="post" class="register-form" id="register-form">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                <input type="text" name="username" id="name" placeholder="Your Name"/>
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Your Email"/>
                             </div>
                             <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Your Password"/>
                             </div>
                             <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <label for="phone"><i class="zmdi zmdi-phone"></i></label>
+                                <input type="text" name="phone" id="phone" placeholder="Your Phone"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="address"><i class="zmdi zmdi-address"></i></label>
+                                <input type="text" name="address" id="address" placeholder="Your Address"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="role" id="role" value="User"/>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Sign Up"/>
                             </div>
                         </form>
                     </div>
@@ -79,12 +86,12 @@
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">Sign up</h2>
+                        <h2 class="form-title">Login</h2>
                         <p style="color: red" class="text-danger">${mess}</p>
                         <form action="UserServlet" method="get">
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="Username" id="your_name" placeholder="Your Name"/>
+                                <input type="text" name="Email" id="your_email" placeholder="Your Email"/>
                             </div>
                             <div class="form-group">
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
@@ -119,45 +126,46 @@
 <script src="js/main.js"></script>
 <script>
     $(document).ready(function(){
-        // Ẩn section đăng ký khi trang tải
+        // Hide sign-up section on page load
         $(".signup").hide();
 
-        // Hiển thị section đăng ký khi "Create an account" được nhấn
+        // Show sign-up section when "Create an account" is clicked
         $("#show-signup").click(function(){
             $(".sign-in").hide();
             $(".signup").show();
         });
 
-        // Hiển thị section đăng nhập khi "I am already a member" được nhấn
+        // Show sign-in section when "I am already a member" is clicked
         $("#show-signin").click(function(){
             $(".signup").hide();
             $(".sign-in").show();
         });
 
-        // Kiểm tra xem có thông tin đăng nhập được lưu trong localStorage hay không
-        if(localStorage.getItem('rememberMe') && localStorage.getItem('username') && localStorage.getItem('password')) {
-            // Đổ thông tin đăng nhập vào các trường input
-            $("#your_name").val(localStorage.getItem('username'));
+        // Check if login details are saved in localStorage
+        if(localStorage.getItem('email') && localStorage.getItem('password')) {
+            // Populate login form with stored detai     if(localStorals
+            $("#your_email").val(localStorage.getItem('email'));
             $("#your_pass").val(localStorage.getItem('password'));
             $("#remember-me").prop('checked', true);
         }
 
-        // Bắt sự kiện submit form đăng nhập
+        // Capture submit event of login form
         $("#signin").click(function(){
-            // Kiểm tra xem người dùng có chọn "Remember me" không
+            // Check if "Remember me" is checked
             if($("#remember-me").prop('checked')) {
-                // Lưu thông tin đăng nhập vào localStorage
-                localStorage.setItem('username', $("#your_name").val());
+                // Save login details to localStorage
+                localStorage.setItem('email', $("#your_email").val());
                 localStorage.setItem('password', $("#your_pass").val());
                 localStorage.setItem('rememberMe', true);
             } else {
-                // Xóa thông tin đăng nhập từ localStorage nếu "Remember me" không được chọn
-                localStorage.removeItem('username');
+                // Remove login details from localStorage if "Remember me" is not checked
+                localStorage.removeItem('email');
                 localStorage.removeItem('password');
                 localStorage.removeItem('rememberMe');
             }
         });
     });
 </script>
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
