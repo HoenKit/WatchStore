@@ -128,7 +128,7 @@
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                 <c:if test="${sessionScope.auth.role != 'Admin'}">
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="index.jsp">Home</a>
+                  <a class="nav-link me-4 active" href="WelcomeServlet?">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#company-services">Services</a>
@@ -145,7 +145,7 @@
                 </c:if>
                 <c:if test="${sessionScope.auth.role == 'Admin'}">
                     <li class="nav-item">
-                  <a class="nav-link me-4 active" href="index.jsp">Home</a>
+                  <a class="nav-link me-4 active" href="WelcomeServlet?">Home</a>
                     </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" href="ProductServlet?command=list">Manage Product</a>

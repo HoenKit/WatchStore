@@ -136,5 +136,22 @@ public class UserDAO {
             e.printStackTrace(); // Handle the exception appropriately
         }
     }
+    public boolean checkUserExist(String email, String username) {
+    String query = "SELECT COUNT(*) FROM Users WHERE Email = ? OR Username = ?";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, email);
+        statement.setString(2, username);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0; // Returns true if either email or username exists
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Handle SQL exception appropriately
+    }
+    return false; // Returns false if there is an SQL error or neither email nor username is found
+}
+
 }
 
