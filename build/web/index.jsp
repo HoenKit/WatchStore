@@ -14,7 +14,7 @@
                 <div class="col-md-6">
                   <div class="banner-content">
                     <h1 class="display-2 text-uppercase text-dark pb-5">Your Products Are Great.</h1>
-                    <a href="listProduct.jsp" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                    <a href="ProductServlet?" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
                   </div>
                 </div>
                 <div class="col-md-5">
@@ -31,7 +31,7 @@
                 <div class="col-md-6">
                   <div class="banner-content">
                     <h1 class="display-2 text-uppercase text-dark pb-5">Technology Hack You Won't Get</h1>
-                    <a href="listProduct.jsp" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                    <a href="ProductServlet?" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
                   </div>
                 </div>
                 <div class="col-md-5">
@@ -129,29 +129,30 @@
           <div class="swiper product-swiper">
             <div class="swiper-wrapper">
 
-                    <c:forEach var="product" items="${productList}">
-                        <div class="swiper-slide">
-                            <div class="product-card position-relative">
-                                <div class="image-holder">
-                                    <img src="images/${product.imageURL}" alt="${product.productName}" class="img-fluid">
-                                </div>
-                                <div class="cart-concern position-absolute">
-                                    <div class="cart-button d-flex">
-                                        <input type="hidden" name="productId">
-                                        <input type="hidden" name="productName" >
-                                        <input type="hidden" name="productPrice" >
-                                        <button type="submit" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></button>
-                                    </div>
-                                </div>
-                                <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                    <h3 class="card-title text-uppercase">
-                                        <a href="#">${product.productName}</a>
-                                    </h3>
-                                    <span class="item-price text-primary">$${product.price}</span>
+                <c:forEach var="product" items="${productList}">
+                    <div class="swiper-slide">
+                        <div class="product-card position-relative">
+                            <div class="image-holder">
+                                <img src="images/${product.imageURL}" alt="${product.productName}" class="img-fluid">
+                            </div>
+                            <div class="cart-concern position-absolute">
+                                <div class="cart-button d-flex">
+                                    <c:url var="productLink" value="ProductServlet">
+                                        <c:param name="command" value="load"></c:param>
+                                        <c:param name="productID" value="${product.productID}"></c:param>
+                                    </c:url>
+                                    <button type="submit" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></button>
                                 </div>
                             </div>
+                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                                <h3 class="card-title text-uppercase">
+                                    <a href="${productLink}">${product.productName}</a>
+                                </h3>
+                                <span class="item-price text-primary">$${product.price}</span>
+                            </div>
                         </div>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
 
             </div>
           </div>
@@ -167,7 +168,7 @@
           <div class="text-content offset-4 padding-medium">
             <h3>10% off</h3>
             <h2 class="display-2 pb-5 text-uppercase text-dark">New year sale</h2>
-            <a href="listProduct.jsp" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Sale</a>
+            <a href="ProductServlet?" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Sale</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">

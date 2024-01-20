@@ -20,14 +20,14 @@ public class UserDAO {
         this.connection = connection;
     }
     
-     public User checkLogIn(String username, String password) {
+     public User checkLogIn(String email, String password) {
     try {
         Connection con = DatabaseConnector.getConnection();
-        String sql = "SELECT * FROM Users WHERE Username = ? AND CONVERT(VARCHAR(MAX), Password) = ?";
+        String sql = "SELECT * FROM Users WHERE Email = ? AND CONVERT(VARCHAR(MAX), Password) = ?";
        
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setString(1, username);
+            statement.setString(1, email);
             statement.setString(2, password);
 
             try (ResultSet rs = statement.executeQuery()) {

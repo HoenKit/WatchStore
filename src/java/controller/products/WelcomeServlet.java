@@ -12,8 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 import model.database.DatabaseConnector;
+import model.entity.Category;
 import model.entity.Product;
 
 /**
@@ -65,6 +67,11 @@ public class WelcomeServlet extends HttpServlet {
         ProductDAO productDAO = new ProductDAO(connection);
         List<Product> productList = productDAO.getAllProducts();
         request.setAttribute("productList", productList);
+         CategoryDAO categoryDAO = new CategoryDAO(connection);
+            // Retrieve the list of categories
+            List<Category> categoryList = categoryDAO.getAllCategories();
+            // Set the categoryList as an attribute in the request
+            request.setAttribute("categoryList", categoryList);
         // Forward the request to the listProduct.jsp page
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

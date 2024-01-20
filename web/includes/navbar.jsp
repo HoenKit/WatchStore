@@ -80,27 +80,13 @@
           <h5 class="cat-list-title">Browse Categories</h5>
           
           <ul class="cat-list">
-            <li class="cat-list-item">
-              <a href="#" title="Mobile Phones">Mobile Phones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Smart Watches">Smart Watches</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Headphones">Headphones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Accessories">Accessories</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Monitors">Monitors</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Speakers">Speakers</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Memory Cards">Memory Cards</a>
-            </li>
+              <c:forEach var="category" items="${categoryList}">
+                  <li class="cat-list-item">
+                      <a href="CategoryServlet?categoryID=${category.categoryID}" title="<c:out value="${category.categoryName}" />">
+                          <c:out value="${category.categoryName}" />
+                      </a>
+                  </li>
+              </c:forEach>
           </ul>
 
         </div>
@@ -137,22 +123,26 @@
                   <a class="nav-link me-4" href="#mobile-products">Products</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
                 </li>
+                
                 </c:if>
                 <c:if test="${sessionScope.auth.role == 'Admin'}">
                     <li class="nav-item">
                   <a class="nav-link me-4 active" href="WelcomeServlet?">Home</a>
                     </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Product</a>
+                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Users</a>
                         </li>
 
                 </c:if>
                 <c:if test="${sessionScope.auth != null}">
+                    <li class="nav-item">
+                  <a class="nav-link me-4" href="profile.jsp">Profile</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="LogoutServlet">Log out</a>
                 </li>
@@ -169,7 +159,7 @@
                     </li>
                   
                     <li>
-                      <a href="shop.html" class="dropdown-item">Shop</a>
+                      <a href="ProductServlet?" class="dropdown-item">Shop</a>
                     </li>
                     <li>
                       <a href="cart.html" class="dropdown-item">Cart</a>
@@ -177,12 +167,8 @@
                     <li>
                       <a href="checkout.html" class="dropdown-item">Checkout</a>
                     </li>
-                    <li>
-                      <a href="single-post.html" class="dropdown-item">Single Post</a>
-                    </li>
-                    <li>
-                      <a href="single-product.html" class="dropdown-item">Single Product</a>
-                    </li>
+                    
+                    
                     <li>
                       <a href="contact.html" class="dropdown-item">Contact</a>
                     </li>

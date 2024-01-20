@@ -1,31 +1,32 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.account;
+package controller.products;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.dao.UserDAO;
+import model.dao.CategoryDAO;
+import model.dao.ProductDAO;
 import model.database.DatabaseConnector;
-import model.entity.User;
-
-
+import model.entity.Category;
+import model.entity.Product;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
-@WebServlet (name = "UserServlet",urlPatterns ={"/login"})
-public class UserServlet extends HttpServlet {
+public class CategoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,19 +40,18 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserServlet</title>");            
+            out.println("<title>Servlet CategoryServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CategoryServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,42 +66,36 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-                    Connection connection = DatabaseConnector.getConnection();
-			String email = request.getParameter("Email");
-			String password = request.getParameter("Password");
-                        
+           Connection connection = DatabaseConnector.getConnection();
+           ProductDAO productDAO = new ProductDAO(connection);
+            // Get categoryId parameter from the request
+            String categoryIdParam = request.getParameter("categoryID");
 
+            if (categoryIdParam != null && !categoryIdParam.isEmpty()) {
+               
+               try {
+                   int categoryId = Integer.parseInt(categoryIdParam);
+                   
+                   // Retrieve products by category
+                   List<Product> products = productDAO.getProductsByCategory(connection, categoryId);
+                   CategoryDAO categoryDAO = new CategoryDAO(connection);
+                   // Retrieve the list of categories
+                   List<Category> categoryList = categoryDAO.getAllCategories();
+                   // Set the categoryList as an attribute in the request
+                   request.setAttribute("categoryList", categoryList);
+                   // Set the products as an attribute in the request
+                   request.setAttribute("productList", products);
 
-			UserDAO udao = new UserDAO(connection);
-                        
-                        User user = new User(email,password);
-			  try {
-
-                         user = udao.checkLogIn(email, password);
-
-                    } catch (Exception e) {
-                        System.out.println("===============");              
-                        System.out.println(e);
-
-                    }
-			if (user != null) {
-                                HttpSession session = request.getSession();
-				session.setAttribute("auth", user);
-                                
-//				System.out.print("user logged in");
-				response.sendRedirect("WelcomeServlet?");
-			} else {
-                                request.setAttribute("mess","Wrong Name or Password, please try again!");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
-                                
-			}
-
-		    }
-
+                   // Forward the request to the "productsByCategory.jsp" page (create this JSP)
+                   request.getRequestDispatcher("/listProduct.jsp").forward(request, response);
+               } catch (SQLException ex) {
+                   Logger.getLogger(CategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            }
+        
+        
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

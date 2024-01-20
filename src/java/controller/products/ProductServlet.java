@@ -19,9 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.dao.BrandDAO;
+import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 import model.database.DatabaseConnector;
 import model.entity.Brand;
+import model.entity.Category;
 import model.entity.Product;
 
 
@@ -70,7 +72,13 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
           try {
+              Connection connection = DatabaseConnector.getConnection();
             String action = request.getParameter("command");
+            CategoryDAO categoryDAO = new CategoryDAO(connection);
+            // Retrieve the list of categories
+            List<Category> categoryList = categoryDAO.getAllCategories();
+            // Set the categoryList as an attribute in the request
+            request.setAttribute("categoryList", categoryList);
             if (action == null) {
                 action = "";
             }
@@ -167,7 +175,7 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("LoadProduct", product);
 
         // Forward the request to the "showProductInfo.jsp" page
-        request.getRequestDispatcher("showProductInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("ShowProductInfo.jsp").forward(request, response);
     
 }
 
