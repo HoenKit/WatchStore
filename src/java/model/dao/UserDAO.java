@@ -110,8 +110,28 @@ public class UserDAO {
         return userList;
     }
 
-    public void updateUser(User user) {
-        String sql = "UPDATE Users SET Username = ?, Password = ?, Email = ?, Address = ?, Phone = ?, Role = ? WHERE UserID = ?";
+   public boolean updateUserProfile(User user) {
+    String sql = "UPDATE Users SET Username = ?, Password = ?, Email = ?, Address = ?, Phone = ? WHERE UserID = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, user.getUsername());
+        statement.setString(2, user.getPassword());
+        statement.setString(3, user.getEmail());
+        statement.setString(4, user.getAddress());
+        statement.setString(5, user.getPhone());
+        statement.setInt(6, user.getUserID()); // Corrected index, should be 6
+
+        int rowsUpdated = statement.executeUpdate();
+
+        return rowsUpdated > 0; // If rowsUpdated > 0, the update was successful
+
+    } catch (SQLException e) {
+        e.printStackTrace(); // Handle the exception appropriately
+    }
+    return false;
+}
+   
+      /* public void addUser(User user) {
+        String sql = "INSERT INTO Users (Username, Password, Email, Address, Phone, Role) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
@@ -119,13 +139,13 @@ public class UserDAO {
             statement.setString(4, user.getAddress());
             statement.setString(5, user.getPhone());
             statement.setString(6, user.getRole());
-            statement.setInt(7, user.getUserID());
 
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
-    }
+    } */
+
 
     public void deleteUser(int userId) {
         String sql = "DELETE FROM Users WHERE UserID = ?";
