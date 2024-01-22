@@ -135,7 +135,7 @@
                             <a class="nav-link me-4" href="ProductServlet?command=list">Manage Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Users</a>
+                            <a class="nav-link me-4" href="">Manage Users</a>
                         </li>
 
                 </c:if>
