@@ -139,7 +139,7 @@
                                 <div class="cart-button d-flex">
                                     <c:url var="productLink" value="ProductServlet">
                                         <c:param name="command" value="load"></c:param>
-                                        <c:param name="id" value="${product.productID}"></c:param>
+                                        <c:param name="productID" value="${product.productID}"></c:param>
                                     </c:url>
                                     <button type="submit" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></button>
                                 </div>

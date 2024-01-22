@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,8 @@
     <br>
     <br>
     <form action="ProductServlet" method="GET">
-       
-
         <div class="container">
-            <table class="table table-loght">
+            <table class="table table-light">
                 <thead>
                     <tr>
                         <th scope="col">Product Name</th>
@@ -40,7 +39,16 @@
                         <tr>
                             <td>${product.productName}</td>
                             <td>${product.price}</td>
-                            <td>${product.productDescription}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${fn:length(product.productDescription) > 20}">
+                                        ${fn:substring(product.productDescription, 0, 20)}...
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${product.productDescription}
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td>${product.stockQuantity}</td>
                             <td>${product.brand.brandName}</td>
                             <td>
@@ -56,10 +64,11 @@
                 <button class="btn btn-dark" name="command" value ="addForm" >Add</button> 
             </div>
             <br>
-    <br>
-    <br>
-    <br>
-    <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
     </form>
     <%@include file="includes/footer.jsp" %>
 </body>

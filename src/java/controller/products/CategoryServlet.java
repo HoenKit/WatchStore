@@ -4,10 +4,14 @@
  */
 package controller.products;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +26,7 @@ import model.entity.Product;
  *
  * @author ADMIN
  */
-public class WelcomeServlet extends HttpServlet {
+public class CategoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +45,10 @@ public class WelcomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet WelcomeServlet</title>");            
+            out.println("<title>Servlet CategoryServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet WelcomeServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CategoryServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,18 +66,34 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Connection connection = DatabaseConnector.getConnection(); // Handle the exception appropriately
-        // You might want to redirect to an error page in case of an exception
-        ProductDAO productDAO = new ProductDAO(connection);
-        List<Product> productList = productDAO.getAllProducts();
-        request.setAttribute("productList", productList);
-         CategoryDAO categoryDAO = new CategoryDAO(connection);
-            // Retrieve the list of categories
-            List<Category> categoryList = categoryDAO.getAllCategories();
-            // Set the categoryList as an attribute in the request
-            request.setAttribute("categoryList", categoryList);
-        // Forward the request to the listProduct.jsp page
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+           Connection connection = DatabaseConnector.getConnection();
+           ProductDAO productDAO = new ProductDAO(connection);
+            // Get categoryId parameter from the request
+            String categoryIdParam = request.getParameter("categoryID");
+
+            if (categoryIdParam != null && !categoryIdParam.isEmpty()) {
+               
+               try {
+                   int categoryId = Integer.parseInt(categoryIdParam);
+                   
+                   // Retrieve products by category
+                   List<Product> products = productDAO.getProductsByCategory(connection, categoryId);
+                   CategoryDAO categoryDAO = new CategoryDAO(connection);
+                   // Retrieve the list of categories
+                   List<Category> categoryList = categoryDAO.getAllCategories();
+                   // Set the categoryList as an attribute in the request
+                   request.setAttribute("categoryList", categoryList);
+                   // Set the products as an attribute in the request
+                   request.setAttribute("productList", products);
+
+                   // Forward the request to the "productsByCategory.jsp" page (create this JSP)
+                   request.getRequestDispatcher("/listProduct.jsp").forward(request, response);
+               } catch (SQLException ex) {
+                   Logger.getLogger(CategoryServlet.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            }
+        
+        
     }
 
     /**

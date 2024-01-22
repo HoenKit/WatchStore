@@ -80,27 +80,13 @@
           <h5 class="cat-list-title">Browse Categories</h5>
           
           <ul class="cat-list">
-            <li class="cat-list-item">
-              <a href="#" title="Mobile Phones">Mobile Phones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Smart Watches">Smart Watches</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Headphones">Headphones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Accessories">Accessories</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Monitors">Monitors</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Speakers">Speakers</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Memory Cards">Memory Cards</a>
-            </li>
+              <c:forEach var="category" items="${categoryList}">
+                  <li class="cat-list-item">
+                      <a href="CategoryServlet?categoryID=${category.categoryID}" title="<c:out value="${category.categoryName}" />">
+                          <c:out value="${category.categoryName}" />
+                      </a>
+                  </li>
+              </c:forEach>
           </ul>
 
         </div>

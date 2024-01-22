@@ -24,7 +24,7 @@
                             <!-- Set up a link for each product -->
                             <c:url var="productLink" value="ProductServlet">
                                 <c:param name="command" value="load"></c:param>
-                                <c:param name="id" value="${product.productID}"></c:param>
+                                <c:param name="productID" value="${product.productID}"></c:param>
                             </c:url>
 
                             <img src="images/${product.imageURL}" class="card-img-top" alt="...">
