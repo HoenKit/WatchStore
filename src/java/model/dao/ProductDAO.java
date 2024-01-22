@@ -62,6 +62,26 @@ public class ProductDAO {
         }
         return productList;
     }
+    
+     public List<Product> getProductsByCategory(Connection connection, int categoryId) throws SQLException {
+        List<Product> productList = new ArrayList<>();
+        String sql = "SELECT * FROM Products "
+                + "JOIN ProductCategories ON Products.ProductID = ProductCategories.ProductID "
+                + "WHERE ProductCategories.CategoryID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, categoryId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = mapResultSetToProduct(resultSet);
+                    productList.add(product);
+                }
+            }
+        }
+
+        return productList;
+    }
 
     public void updateProduct(Product product) {
         String sql = "UPDATE Products SET ProductName = ?, Price = ?, ProductDescription = ?, " +

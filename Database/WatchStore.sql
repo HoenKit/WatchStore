@@ -33,7 +33,7 @@ CREATE TABLE Products (
     ProductID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     ProductName NVARCHAR(100) NULL,
     Price DECIMAL(10, 2) NULL,
-	ProductDescription NVARCHAR(100) NULL,
+	ProductDescription NVARCHAR(MAX) NULL,
     StockQuantity INT NULL,
 	BrandID INT FOREIGN KEY REFERENCES Brands(BrandID),
 	ImageURL NVARCHAR(100) NULL,

@@ -24,8 +24,13 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
+
         <servlet-name>UpdateProfileServlet</servlet-name>
         <servlet-class>controller.account.UpdateProfileServlet</servlet-class>
+
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>controller.products.CategoryServlet</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -48,8 +53,13 @@
         <url-pattern>/WelcomeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>UpdateProfileServlet</servlet-name>
         <url-pattern>/UpdateProfileServlet</url-pattern>
+
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/CategoryServlet</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

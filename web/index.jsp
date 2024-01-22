@@ -129,29 +129,30 @@
           <div class="swiper product-swiper">
             <div class="swiper-wrapper">
 
-                    <c:forEach var="product" items="${productList}">
-                        <div class="swiper-slide">
-                            <div class="product-card position-relative">
-                                <div class="image-holder">
-                                    <img src="images/${product.imageURL}" alt="${product.productName}" class="img-fluid">
-                                </div>
-                                <div class="cart-concern position-absolute">
-                                    <div class="cart-button d-flex">
-                                        <input type="hidden" name="productId">
-                                        <input type="hidden" name="productName" >
-                                        <input type="hidden" name="productPrice" >
-                                        <button type="submit" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></button>
-                                    </div>
-                                </div>
-                                <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                    <h3 class="card-title text-uppercase">
-                                        <a href="#">${product.productName}</a>
-                                    </h3>
-                                    <span class="item-price text-primary">$${product.price}</span>
+                <c:forEach var="product" items="${productList}">
+                    <div class="swiper-slide">
+                        <div class="product-card position-relative">
+                            <div class="image-holder">
+                                <img src="images/${product.imageURL}" alt="${product.productName}" class="img-fluid">
+                            </div>
+                            <div class="cart-concern position-absolute">
+                                <div class="cart-button d-flex">
+                                    <c:url var="productLink" value="ProductServlet">
+                                        <c:param name="command" value="load"></c:param>
+                                        <c:param name="productID" value="${product.productID}"></c:param>
+                                    </c:url>
+                                    <button type="submit" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></button>
                                 </div>
                             </div>
+                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                                <h3 class="card-title text-uppercase">
+                                    <a href="${productLink}">${product.productName}</a>
+                                </h3>
+                                <span class="item-price text-primary">$${product.price}</span>
+                            </div>
                         </div>
-                    </c:forEach>
+                    </div>
+                </c:forEach>
 
             </div>
           </div>
