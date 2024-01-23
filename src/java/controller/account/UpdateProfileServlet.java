@@ -14,52 +14,48 @@ public class UpdateProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            int id = Integer.parseInt(request.getParameter("id"));
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-
-            // Lấy người dùng hiện tại từ session
-            User currentUser = getUserFromDataStorage(request);
-
-            // Cập nhật thông tin nếu không rỗng
-            if (username != null && !username.isEmpty()) {
-                currentUser.setUsername(username);
-            }
-            if (email != null && !email.isEmpty()) {
-                currentUser.setEmail(email);
-            }
-            if (password != null && !password.isEmpty()) {
-                currentUser.setPassword(password);
-            }
-            if (phone != null && !phone.isEmpty()) {
-                currentUser.setPhone(phone);
-            }
-            if (address != null && !address.isEmpty()) {
-                currentUser.setAddress(address);
-            }
-
+            
+            User user=new User();
+            user.setUserID(id);
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setPhone(phone);
+            user.setAddress(address);
+                         
+                    
+            
             // Cập nhật thông tin người dùng trong cơ sở dữ liệu
             UserDAO dao = new UserDAO(DatabaseConnector.getConnection());
-            dao.updateUserProfile(currentUser);
-
-            // Chuyển hướng về trang profile
-            response.sendRedirect("profile.jsp");
+            boolean f=dao.checkPassword(id, password);
+            if(f){
+                boolean f2=dao.updateUserProfile(user);
+                if(f2){
+                request.setAttribute("succMsg", "User Profile Update Successfully");
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
+                }else{
+                request.setAttribute("failedMsg", "Somthing wrong on server");
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
+                }
+                
+            }
+            /*else{
+                request.setAttribute("failedMsg", "Your Password is Incorect");
+                request.getRequestDispatcher("profile.jsp").forward(request, response);
+            }*/
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Xử lý ngoại lệ một cách phù hợp
         }
     }
 
-    private User getUserFromDataStorage(HttpServletRequest request) {
-        int userID = (int) request.getSession().getAttribute("userID");
-
-        UserDAO dao = new UserDAO(DatabaseConnector.getConnection());
-        return dao.getUserById(userID);
-    }
-
+   
     @Override
     public String getServletInfo() {
         return "Servlet to update user profile";

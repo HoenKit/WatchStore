@@ -5,17 +5,27 @@
         <group>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/web/login.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/model/dao/ProductCategoryDAO.java</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/error.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/model/dao/ProductDAO.java</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/products/ProductServlet.java</file>
-            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/profile.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/account/SignUpServlet.java</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/addProduct.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/web/ManageProduct.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/profile.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/model/database/DatabaseConnector.java</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/includes/navbar.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/listProduct.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/web/editProduct.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/index.jsp</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/style.css</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/web/ShowProductInfo.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/web/includes/header.jsp</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/account/LogoutServlet.java</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/account/UpdateProfileServlet.java</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/account/UserServlet.java</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/model/dao/UserDAO.java</file>
             <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/controller/products/CategoryServlet.java</file>
+            <file>file:/D:/DES/Download/GIT_2/WatchStore/src/java/model/entity/User.java</file>
         </group>
     </open-files>
 </project-private>

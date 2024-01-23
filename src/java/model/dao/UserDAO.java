@@ -42,27 +42,6 @@ public class UserDAO {
     }
     return null;
 }
-  
-
-     
-     
-     
-    public void addUser(User user) {
-        String sql = "INSERT INTO Users (Username, Password, Email, Address, Phone, Role) VALUES (?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getAddress());
-            statement.setString(5, user.getPhone());
-            statement.setString(6, user.getRole());
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-    }
-
     public User getUserById(int userId) {
         String sql = "SELECT * FROM Users WHERE UserID = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -111,6 +90,7 @@ public class UserDAO {
     }
 
    public boolean updateUserProfile(User user) {
+    boolean f = false;
     String sql = "UPDATE Users SET Username = ?, Password = ?, Email = ?, Address = ?, Phone = ? WHERE UserID = ?";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setString(1, user.getUsername());
@@ -120,17 +100,41 @@ public class UserDAO {
         statement.setString(5, user.getPhone());
         statement.setInt(6, user.getUserID()); // Corrected index, should be 6
 
-        int rowsUpdated = statement.executeUpdate();
-
-        return rowsUpdated > 0; // If rowsUpdated > 0, the update was successful
+        
+        int i = statement.executeUpdate();
+        if(i==1){
+           f=true;
+        }
 
     } catch (SQLException e) {
         e.printStackTrace(); // Handle the exception appropriately
     }
-    return false;
+    return f;
 }
    
-      /* public void addUser(User user) {
+   public boolean checkPassword(int userID, String password ){
+        boolean f = false;
+        String sql = "SELECT * FROM Users WHERE UserID=? and Password=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, userID);
+            statement.setString(2, password);
+            
+            ResultSet resultSet= statement.executeQuery();
+            while(resultSet.next())
+            {
+                f=true;
+            }
+           
+            
+            
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+        return f;
+       
+   }
+   
+       public void addUser(User user) {
         String sql = "INSERT INTO Users (Username, Password, Email, Address, Phone, Role) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getUsername());
@@ -144,7 +148,7 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
-    } */
+    } 
 
 
     public void deleteUser(int userId) {
