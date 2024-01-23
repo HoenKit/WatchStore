@@ -125,7 +125,9 @@
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
                 </li>
-                
+                 <li class="nav-item">
+                  <a class="nav-link me-4" href="profile.jsp">Profile</a>
+                </li>
                 </c:if>
                 <c:if test="${sessionScope.auth.role == 'Admin'}">
                     <li class="nav-item">
@@ -135,14 +137,17 @@
                             <a class="nav-link me-4" href="ProductServlet?command=list">Manage Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="ProductServlet?command=list">Manage Users</a>
+                            <a class="nav-link me-4" href="">Manage Users</a>
+                        </li>
+                    <li class="nav-item">
+                            <a class="nav-link me-4" href="BrandServlet?">Manage Brands</a>
+                        </li>
+                    <li class="nav-item">
+                            <a class="nav-link me-4" href="ManageCategoryServlet?">Manage Categories</a>
                         </li>
 
                 </c:if>
-                <c:if test="${sessionScope.auth != null}">
-                    <li class="nav-item">
-                  <a class="nav-link me-4" href="profile.jsp">Profile</a>
-                </li>
+                <c:if test="${sessionScope.auth != null}"> 
                 <li class="nav-item">
                   <a class="nav-link me-4" href="LogoutServlet">Log out</a>
                 </li>

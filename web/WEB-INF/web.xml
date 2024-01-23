@@ -27,6 +27,11 @@
         <servlet-name>CategoryServlet</servlet-name>
         <servlet-class>controller.products.CategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageCategoryServlet</servlet-name>
+        <servlet-class>controller.products.ManageCategoryServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
@@ -51,9 +56,12 @@
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/CategoryServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageCategoryServlet</servlet-name>
+        <url-pattern>/ManageCategoryServlet</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

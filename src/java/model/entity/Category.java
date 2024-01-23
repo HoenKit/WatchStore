@@ -14,6 +14,10 @@ public class Category {
 
     // Constructors, getters, and setters
 
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public Category(int categoryID) {
         this.categoryID = categoryID;
     }
