@@ -91,13 +91,13 @@ public class UserDAO {
 
    public boolean updateUserProfile(User user) {
     boolean f = false;
-    String sql = "UPDATE Users SET Username = ?, Password = ?, Email = ?, Address = ?, Phone = ? WHERE UserID = ?";
+    String sql = "UPDATE Users SET Username = ?, Email = ?, Address = ?, Phone = ?, Password = ? WHERE UserID = ?";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setString(1, user.getUsername());
-        statement.setString(2, user.getPassword());
-        statement.setString(3, user.getEmail());
-        statement.setString(4, user.getAddress());
-        statement.setString(5, user.getPhone());
+        statement.setString(2, user.getEmail());
+        statement.setString(3, user.getAddress());
+        statement.setString(4, user.getPhone());
+        statement.setString(5, user.getPassword());
         statement.setInt(6, user.getUserID()); // Corrected index, should be 6
 
         
@@ -111,7 +111,7 @@ public class UserDAO {
     }
     return f;
 }
-   
+/*   
    public boolean checkPassword(int userID, String password ){
         boolean f = false;
         String sql = "SELECT * FROM Users WHERE UserID=? and Password=?";
@@ -133,6 +133,7 @@ public class UserDAO {
         return f;
        
    }
+*/
    
        public void addUser(User user) {
         String sql = "INSERT INTO Users (Username, Password, Email, Address, Phone, Role) VALUES (?, ?, ?, ?, ?, ?)";

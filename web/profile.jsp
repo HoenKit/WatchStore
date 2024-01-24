@@ -24,11 +24,11 @@
     <br>
     <br>
     <br>
-    <form action="UpdateProfileServlet" method="post">
+    <form action="UpdateProfileServlet" method="Post">
         <input type="hidden" value="${user.userID}" name="id">
         <div class="container">
             <br>
-            <h2>Edit Profile</h2>
+            <h2 style="font-style: italic; font-family: Serif">Edit Profile</h2>
            
          <c:if test="${not empty failedMsg}">
             <h5 class="text-center text-danger">${failedMsg}</h5> 
@@ -53,7 +53,7 @@
                                             <h6 class="mb-0">Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="username" value="${user.username}">
+                                            <input type="text" class="form-control" name="username" value="${auth.username}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -61,23 +61,16 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="email" value="${user.email}">
+                                            <input type="text" class="form-control" name="email" value="${auth.email}">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Password</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="password" value="${user.password}">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="phone" value="${user.phone}">
+                                            <input type="text" class="form-control" name="phone" value="${auth.phone}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -85,7 +78,15 @@
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="address" value="${user.address}">
+                                            <input type="text" class="form-control" name="address" value="${auth.address}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Password</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" class="form-control" name="password" value="${auth.password}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -101,7 +102,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>                          
     </form>
 </body>
 </html>
